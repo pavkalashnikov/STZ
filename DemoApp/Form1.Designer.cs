@@ -32,7 +32,8 @@
             this.destinationPictureBox = new System.Windows.Forms.PictureBox();
             this.loadBtn = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.processBtn = new System.Windows.Forms.Button();
+            this.night1Btn = new System.Windows.Forms.Button();
+            this.night2Btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sourcePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.destinationPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -67,22 +68,33 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
-            // processBtn
+            // night1Btn
             // 
-            this.processBtn.Location = new System.Drawing.Point(533, 184);
-            this.processBtn.Name = "processBtn";
-            this.processBtn.Size = new System.Drawing.Size(207, 23);
-            this.processBtn.TabIndex = 3;
-            this.processBtn.Text = "Process";
-            this.processBtn.UseVisualStyleBackColor = true;
-            this.processBtn.Click += new System.EventHandler(this.processBtn_Click);
+            this.night1Btn.Location = new System.Drawing.Point(533, 184);
+            this.night1Btn.Name = "night1Btn";
+            this.night1Btn.Size = new System.Drawing.Size(207, 23);
+            this.night1Btn.TabIndex = 3;
+            this.night1Btn.Text = "Night1";
+            this.night1Btn.UseVisualStyleBackColor = true;
+            this.night1Btn.Click += new System.EventHandler(this.night1Btn_Click);
+            // 
+            // night2Btn
+            // 
+            this.night2Btn.Location = new System.Drawing.Point(533, 222);
+            this.night2Btn.Name = "night2Btn";
+            this.night2Btn.Size = new System.Drawing.Size(207, 23);
+            this.night2Btn.TabIndex = 4;
+            this.night2Btn.Text = "Night2";
+            this.night2Btn.UseVisualStyleBackColor = true;
+            this.night2Btn.Click += new System.EventHandler(this.night2Btn_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1269, 526);
-            this.Controls.Add(this.processBtn);
+            this.Controls.Add(this.night2Btn);
+            this.Controls.Add(this.night1Btn);
             this.Controls.Add(this.loadBtn);
             this.Controls.Add(this.destinationPictureBox);
             this.Controls.Add(this.sourcePictureBox);
@@ -100,7 +112,8 @@
         private System.Windows.Forms.PictureBox destinationPictureBox;
         private System.Windows.Forms.Button loadBtn;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.Windows.Forms.Button processBtn;
+        private System.Windows.Forms.Button night1Btn;
+        private System.Windows.Forms.Button night2Btn;
     }
 }
 

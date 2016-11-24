@@ -27,13 +27,22 @@ namespace DemoApp
             }
         }
 
-        private void processBtn_Click(object sender, EventArgs e)
+        private void night1Btn_Click(object sender, EventArgs e)
         {
             var source = sourcePictureBox.Image;
 
-            var res = new Converter().Process(source);
+            var res = new Converter().Night1(source);
 
-            destinationPictureBox.Image = source;
+            destinationPictureBox.Image = res;
+        }
+
+        private void night2Btn_Click(object sender, EventArgs e)
+        {
+            var source = sourcePictureBox.Image;
+
+            var res = new Converter().Night2(source);
+
+            destinationPictureBox.Image = res;
         }
     }
 }
