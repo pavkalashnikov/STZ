@@ -58,9 +58,12 @@ namespace NightVision
                     r = prepareComponent(r);
                     g = prepareComponent(g);
                     b = prepareComponent(b);
-                    var X = r * 0.5149 + g * 0.3244 + b * 0.1607;
-                    var Y = r * 0.2654 + g * 0.6704 + b * 0.0642;
-                    var Z = r * 0.0248 + g * 0.1248 + b * 0.8504;
+                    //var X = r * 0.5149 + g * 0.3244 + b * 0.1607;
+                    //var Y = r * 0.2654 + g * 0.6704 + b * 0.0642;
+                    //var Z = r * 0.0248 + g * 0.1248 + b * 0.8504;
+                    var X = r * 0.5093439 + g * 0.3209071 + b * 0.1339691;
+                    var Y = r * 0.2748840 + g * 0.6581315 + b * 0.0669845;
+                    var Z = r * 0.0242545 + g * 0.1087821 + b * 0.6921735;
                     bitmap.SetPixel(x, y, Color.FromArgb((int)Math.Round(X), (int)Math.Round(Y), (int)Math.Round(Z)));
                 }
             }
