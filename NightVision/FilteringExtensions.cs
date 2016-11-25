@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace NightVision
 {
-    public static class FilteringExtensions
+    internal static class FilteringExtensions
     {
-        public static int GetValidColorComponent(this double component)
+        internal static int GetValidColorComponent(this double component)
         {
             if (component > 255)
             {

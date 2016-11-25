@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace NightVision
 {
-    class Gausian
+    internal class Gausian
     {
-        public Bitmap ApplyFilter(Bitmap image, float sigma, int windowSize)
+        internal Bitmap ApplyFilter(Bitmap image, float sigma, int windowSize)
         {
             var window = InitializeWindow(sigma, windowSize);
 

@@ -31,7 +31,7 @@ namespace DemoApp
         {
             var source = sourcePictureBox.Image;
 
-            var res = new Converter().Night2(source);
+            var res = new Converter(0.2f).Night1(source);
 
             destinationPictureBox.Image = res;
         }
@@ -40,7 +40,7 @@ namespace DemoApp
         {
             var source = sourcePictureBox.Image;
 
-            var res = new Converter().Night1(source);
+            var res = new Converter(2f).Night2(source);
 
             destinationPictureBox.Image = res;
         }

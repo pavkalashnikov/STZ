@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NightVision
 {
-    class LockBitmap
+    internal class LockBitmap
     {
         Bitmap source = null;
         IntPtr Iptr = IntPtr.Zero;
@@ -20,12 +20,12 @@ namespace NightVision
         public int Width { get; private set; }
         public int Height { get; private set; }
 
-        public LockBitmap(Bitmap source)
+        internal LockBitmap(Bitmap source)
         {
             this.source = source;
         }
 
-        public void LockBits()
+        internal void LockBits()
         {
             try
             {
@@ -66,7 +66,7 @@ namespace NightVision
             }
         }
 
-        public void UnlockBits()
+        internal void UnlockBits()
         {
             try
             {
@@ -82,7 +82,7 @@ namespace NightVision
             }
         }
 
-        public Color GetPixel(int x, int y)
+        internal Color GetPixel(int x, int y)
         {
             Color clr = Color.Empty;
 
@@ -119,7 +119,7 @@ namespace NightVision
             return clr;
         }
 
-        public void SetPixel(int x, int y, Color color)
+        internal void SetPixel(int x, int y, Color color)
         {
             // Get color components count
             int cCount = Depth / 8;

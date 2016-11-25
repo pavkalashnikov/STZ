@@ -5,12 +5,16 @@ namespace NightVision
 {
     public class Converter
     {
+        private float a;
+        public Converter(float a)
+        {
+            this.a = a;
+        }
         public Image Night1(Image source)
         {
             var xyz = toXYZ(source);
             var blur1 = new Gausian().ApplyFilter(xyz, (float)0.1, 11);
             var blur2 = rightDivision((Bitmap)blur1.Clone(), 6);
-            var a = 0.2;
             var res = loopMatrix((Bitmap)source, (x, y) =>
             {
                 var r = (int)Math.Round((blur1.GetPixel(x, y).R - blur2.GetPixel(x, y).R) * a + blur2.GetPixel(x, y).R);
@@ -28,7 +32,6 @@ namespace NightVision
             var xyz = toXYZ(source);
             var blur1 = new Gausian().ApplyFilter(xyz, (float)0.1, 11);
             var blur2 = rightDivision((Bitmap)blur1.Clone(), 6);
-            var a = 2;
             var res = loopMatrix((Bitmap)source, (x, y) =>
             {
                 var r = (int)Math.Round((blur1.GetPixel(x, y).R - blur2.GetPixel(x, y).R) * ((double)1 / a) + blur2.GetPixel(x, y).R);
