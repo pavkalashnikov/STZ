@@ -10,33 +10,18 @@ namespace NightVision
         {
             this.a = a;
         }
-        public Image Night1(Image source)
+        public Image Convert(Image source)
         {
             var xyz = toXYZ(source);
             var blur1 = new Gausian().ApplyFilter(xyz, (float)0.1, 11);
             var blur2 = rightDivision((Bitmap)blur1.Clone(), 6);
             var res = loopMatrix((Bitmap)source, (x, y) =>
             {
-                var r = (int)Math.Round((blur1.GetPixel(x, y).R - blur2.GetPixel(x, y).R) * a + blur2.GetPixel(x, y).R);
-                var g = (int)Math.Round((blur1.GetPixel(x, y).G - blur2.GetPixel(x, y).G) * a + blur2.GetPixel(x, y).G);
-                var b = (int)Math.Round((blur1.GetPixel(x, y).B - blur2.GetPixel(x, y).B) * a + blur2.GetPixel(x, y).B);
-
-                return Color.FromArgb(r, g, b);
-            });
-            res = toRGB(res);
-            return res;
-        }
-
-        public Image Night2(Image source)
-        {
-            var xyz = toXYZ(source);
-            var blur1 = new Gausian().ApplyFilter(xyz, (float)0.1, 11);
-            var blur2 = rightDivision((Bitmap)blur1.Clone(), 6);
-            var res = loopMatrix((Bitmap)source, (x, y) =>
-            {
-                var r = (int)Math.Round((blur1.GetPixel(x, y).R - blur2.GetPixel(x, y).R) * ((double)1 / a) + blur2.GetPixel(x, y).R);
-                var g = (int)Math.Round((blur1.GetPixel(x, y).G - blur2.GetPixel(x, y).G) * ((double)1 / a) + blur2.GetPixel(x, y).G);
-                var b = (int)Math.Round((blur1.GetPixel(x, y).B - blur2.GetPixel(x, y).B) * ((double)1 / a) + blur2.GetPixel(x, y).B);
+                var pixel1 = blur1.GetPixel(x, y);
+                var pixel2 = blur2.GetPixel(x, y);
+                var r = (int)Math.Round((pixel1.R - pixel2.R) * a + pixel2.R);
+                var g = (int)Math.Round((pixel1.G - pixel2.G) * a + pixel2.G);
+                var b = (int)Math.Round((pixel1.B - pixel2.B) * a + pixel2.B);
 
                 return Color.FromArgb(r, g, b);
             });
@@ -48,29 +33,26 @@ namespace NightVision
 
         private Bitmap toXYZ(Image source)
         {
-            source = (Image)source.Clone();
-            var bitmap = (Bitmap)source;
-            for (var x = 0; x < source.Width; x++)
+            var bitmap = (Bitmap)source.Clone();
+            var result = loopMatrix(bitmap, (x, y) =>
             {
-                for (var y = 0; y < source.Height; y++)
-                {
-                    var pixel = bitmap.GetPixel(x, y);
-                    var r = (double)pixel.R / 255;
-                    var g = (double)pixel.G / 255;
-                    var b = (double)pixel.B / 255;
-                    r = prepareComponent(r);
-                    g = prepareComponent(g);
-                    b = prepareComponent(b);
-                    //var X = r * 0.5149 + g * 0.3244 + b * 0.1607;
-                    //var Y = r * 0.2654 + g * 0.6704 + b * 0.0642;
-                    //var Z = r * 0.0248 + g * 0.1248 + b * 0.8504;
-                    var X = r * 0.5093439 + g * 0.3209071 + b * 0.1339691;
-                    var Y = r * 0.2748840 + g * 0.6581315 + b * 0.0669845;
-                    var Z = r * 0.0242545 + g * 0.1087821 + b * 0.6921735;
-                    bitmap.SetPixel(x, y, Color.FromArgb((int)Math.Round(X), (int)Math.Round(Y), (int)Math.Round(Z)));
-                }
-            }
-            return bitmap;
+                var pixel = bitmap.GetPixel(x, y);
+                var r = (double)pixel.R / 255;
+                var g = (double)pixel.G / 255;
+                var b = (double)pixel.B / 255;
+                r = prepareComponent(r);
+                g = prepareComponent(g);
+                b = prepareComponent(b);
+                //var X = r * 0.5149 + g * 0.3244 + b * 0.1607;
+                //var Y = r * 0.2654 + g * 0.6704 + b * 0.0642;
+                //var Z = r * 0.0248 + g * 0.1248 + b * 0.8504;
+                var X = r * 0.5093439 + g * 0.3209071 + b * 0.1339691;
+                var Y = r * 0.2748840 + g * 0.6581315 + b * 0.0669845;
+                var Z = r * 0.0242545 + g * 0.1087821 + b * 0.6921735;
+
+                return Color.FromArgb((int)Math.Round(X), (int)Math.Round(Y), (int)Math.Round(Z));
+            });
+            return result;
         }
 
         private Bitmap toRGB(Bitmap source)
@@ -118,15 +100,10 @@ namespace NightVision
                g *= 255;
                b *= 255;
 
-               return Color.FromArgb(normalize(r), normalize(g), normalize(b));
+               return Color.FromArgb(r.GetValidColorComponent(), g.GetValidColorComponent(), b.GetValidColorComponent());
            });
 
             return res;
-        }
-
-        private int normalize(double x)
-        {
-            return x <= 0 ? 0 : (int)Math.Round(x);
         }
 
         private double prepareComponent(double a)
@@ -144,21 +121,17 @@ namespace NightVision
 
         private Bitmap rightDivision(Bitmap source, int divisor)
         {
-            var dest = (Bitmap)source.Clone();
-
-            for (var x = 0; x < source.Width; x++)
+            source = (Bitmap)source.Clone();
+            var result = loopMatrix(source, (x, y) =>
             {
-                for (var y = 0; y < source.Height; y++)
-                {
-                    var pixel = source.GetPixel(x, y);
-                    var r = pixel.R / 6;
-                    var g = pixel.G / 6;
-                    var b = pixel.B / 6;
-                    dest.SetPixel(x, y, Color.FromArgb(r, g, b));
-                }
-            }
+                var pixel = source.GetPixel(x, y);
+                var r = pixel.R / 6;
+                var g = pixel.G / 6;
+                var b = pixel.B / 6;
+                return Color.FromArgb(r, g, b);
+            });
 
-            return dest;
+            return result;
         }
 
         private Bitmap loopMatrix(Bitmap source, ProcessPixel process)

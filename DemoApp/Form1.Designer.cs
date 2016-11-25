@@ -33,9 +33,11 @@
             this.loadBtn = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.night1Btn = new System.Windows.Forms.Button();
-            this.night2Btn = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.sourcePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.destinationPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // sourcePictureBox
@@ -74,26 +76,34 @@
             this.night1Btn.Name = "night1Btn";
             this.night1Btn.Size = new System.Drawing.Size(207, 23);
             this.night1Btn.TabIndex = 3;
-            this.night1Btn.Text = "Night1";
+            this.night1Btn.Text = "Convert";
             this.night1Btn.UseVisualStyleBackColor = true;
             this.night1Btn.Click += new System.EventHandler(this.night1Btn_Click);
             // 
-            // night2Btn
+            // label1
             // 
-            this.night2Btn.Location = new System.Drawing.Point(533, 222);
-            this.night2Btn.Name = "night2Btn";
-            this.night2Btn.Size = new System.Drawing.Size(207, 23);
-            this.night2Btn.TabIndex = 4;
-            this.night2Btn.Text = "Night2";
-            this.night2Btn.UseVisualStyleBackColor = true;
-            this.night2Btn.Click += new System.EventHandler(this.night2Btn_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(530, 165);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(16, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "a:";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.DecimalPlaces = 1;
+            this.numericUpDown1.Location = new System.Drawing.Point(552, 163);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(188, 20);
+            this.numericUpDown1.TabIndex = 5;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1269, 526);
-            this.Controls.Add(this.night2Btn);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.night1Btn);
             this.Controls.Add(this.loadBtn);
             this.Controls.Add(this.destinationPictureBox);
@@ -102,7 +112,9 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.sourcePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.destinationPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -113,7 +125,8 @@
         private System.Windows.Forms.Button loadBtn;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button night1Btn;
-        private System.Windows.Forms.Button night2Btn;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 

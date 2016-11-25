@@ -30,19 +30,13 @@ namespace DemoApp
         private void night1Btn_Click(object sender, EventArgs e)
         {
             var source = sourcePictureBox.Image;
+            if (source != null)
+            {
+                var a = numericUpDown1.Value;
+                var res = new Converter((float) a).Convert(source);
 
-            var res = new Converter(0.2f).Night1(source);
-
-            destinationPictureBox.Image = res;
-        }
-
-        private void night2Btn_Click(object sender, EventArgs e)
-        {
-            var source = sourcePictureBox.Image;
-
-            var res = new Converter(2f).Night2(source);
-
-            destinationPictureBox.Image = res;
+                destinationPictureBox.Image = res;
+            }
         }
     }
 }
